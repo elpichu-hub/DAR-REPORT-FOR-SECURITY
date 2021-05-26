@@ -1,0 +1,30 @@
+{% extends 'report/base.html' %}
+{% load crispy_forms_tags %}
+{% load convert_num_to_letter %}
+
+
+
+{% block content %}
+
+
+
+<div class="px-4 pt-5 my-5 text-center ">
+    <h1 class="display-4 fw-bold">Delete Comment?</h1>
+    <br>
+    <div class="col-lg-6 mx-auto">
+        <form method="POST" id='form'>
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="w-100 btn btn-lg btn-danger mt-3"> Delete </button>
+        </form>
+        <a href="{% url 'update' object.id %}"><button type="submit" class="w-100 btn btn-lg btn-secondary mt-3"> Go
+                Back </button></a>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
