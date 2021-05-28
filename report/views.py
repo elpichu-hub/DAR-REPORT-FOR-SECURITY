@@ -4,11 +4,11 @@ from .models import DAR
 from .forms import DARForm
 from datetime import datetime
 from django.views.generic import UpdateView, DeleteView
-from django import forms
+from django.contrib.auth.decorators import login_required
 
 date = datetime.now()
 
-
+@login_required
 def home(request):
     form = DARForm()
     if request.method == 'POST':
@@ -62,6 +62,6 @@ class DARUpdateView(UpdateView):
 class DARDeleteView(DeleteView):
     model = DAR
     context_object_name = 'dar'
-    success_url = '/'
+    success_url = '/report/'
 
 

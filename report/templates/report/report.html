@@ -116,14 +116,14 @@
             
             <h4>
                 {% if d.time and d.additional_comments and not d.officer_relieving and not d.officer_relieved and not d.visitor_front_gate and not d.resident_front_gate and not d.exit_front_gate and not d.entrace_back_gate and not d.exit_back_gate and not d.gym and not d.pool and not d.bascketball_court and not d.tennis_court and not d.club_house and not d.cameras_not_working and not d.gates_not_working and not d.gate_arms_not_working %}
-                <a href=" {% url 'update' d.id %} " style="color: rgb(238, 43, 173);" >{{d.time}}</a> {{ d.additional_comments|safe }} 
+                <a href=" {% url 'update' d.id %} " style="color: maroon;" >{{d.time}}</a> {{ d.additional_comments|safe }} 
                 {% endif %}
             </h4>
            
             <h4>
                 {% if not d.officer_relieving and not d.officer_relieved %}
                     {% if d.visitor_front_gate %}
-                    <a href="{% url 'update' d.id %}" style="color: rgb(23, 198, 211);">{{d.time}}</a> Traffic through the visitor's front gate is {{d.visitor_front_gate}}.
+                    <a href="{% url 'update' d.id %}" style="color: maroon;">{{d.time}}</a> Traffic through the visitor's front gate is {{d.visitor_front_gate}}.
                     {% endif %}
 
                     {% if d.resident_front_gate %}
