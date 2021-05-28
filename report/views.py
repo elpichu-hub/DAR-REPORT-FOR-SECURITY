@@ -9,11 +9,12 @@ import pytz
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
 date = utc_now.astimezone(pytz.timezone('US/Eastern'))
-
+eleven_pm_hour = datetime.datetime(2021, 10, 30, 23)
 
 
 @login_required
 def home(request):
+    
     form = DARForm()
     if request.method == 'POST':
         form = DARForm(request.POST)
@@ -47,6 +48,7 @@ def home(request):
         'dar': DAR.objects.all().order_by('time'),
         'form': form,
         'date': date,
+        'eleven_pm_time': eleven_pm_hour,
     }
     return render(request, 'report/report.html', context)
 
@@ -66,6 +68,7 @@ class DARUpdateView(UpdateView):
 class DARDeleteView(DeleteView):
     model = DAR
     context_object_name = 'dar'
-    success_url = '/report/'
+    success_url = '/'
+
 
 
