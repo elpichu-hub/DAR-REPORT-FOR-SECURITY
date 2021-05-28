@@ -1,11 +1,15 @@
+from datetime import datetime
 from typing import Reversible
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
 
+
+
 class DAR(models.Model):
-    time = models.CharField(max_length=50, default='13:00')
+    #time = models.CharField(max_length=50, default='13:00')
+    time = models.DateTimeField()
     officer_relieving= models.CharField(blank=True, null=True, max_length=20)
     officer_relieved = models.CharField(blank=True, null=True, max_length=20)
     visitor_front_gate = models.CharField(blank=True, null=True, max_length=20)

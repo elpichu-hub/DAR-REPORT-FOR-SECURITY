@@ -12,6 +12,7 @@
             <form method="POST" id='form'>
                 {% csrf_token %}
                 {{form|crispy}}
+                {{ form.media }}
                 <button type="submit" class="w-100 btn btn-lg btn-primary mt-3"> Submit Report </button>
             </form>
         </div>
@@ -20,200 +21,203 @@
             <h3 style="text-align: center;">Daily Activity Report/{{date|date:'F d, o'}}/ Officer:
                 {{user.last_name|capfirst}}</h3>
             <br>
-            {% for d in dar %}
-            <br>
-            <h4>
-                {% if d.officer_relieving %}
-                    <a href=" {% url 'update' d.id %} " style="color: maroon;">{{d.time}}</a> Officer {{d.officer_relieving}} on duty to relieve officer {{d.officer_relieved}}. All notes passed down.
-                    
-                    {% if d.visitor_front_gate %}
-                    Traffic through the visitor's front gate is {{d.visitor_front_gate}}.
-                    {% endif %}
-
-                    {% if d.resident_front_gate %}
-                    Traffic through the resident's front gate is {{d.resident_front_gate}}.
-                    {% endif %}
-
-                    {% if d.exit_front_gate %}
-                    Traffic through the exit front gate is {{d.exit_front_gate}}.
-                    {% endif %}
-
-                    {% if d.exit_back_gate %}
-                    Traffic through the exit back gate is {{d.exit_back_gate}}.
-                    {% endif %}
-
-
-                    {% if d.gym == 1%}
-                    There is {{d.gym|convert_num_to_letter}} resident at the gym.
-                    {% endif %}
-                    {% if d.gym > 1 %}
-                    There are {{d.gym|convert_num_to_letter}} residents at the gym.
-                    {% endif %}
-
-                    {% if d.pool == 1 %}
-                    There is {{d.pool|convert_num_to_letter}} resident at the pool.
-                    {% endif %}
-                    {% if d.pool > 1 %}
-                    There are {{d.pool|convert_num_to_letter}} residents at the pool.
-                    {% endif %}
-
-                    {% if d.bascketball_court == 1 %}
-                    There is {{d.bascketball_court|convert_num_to_letter}} resident at the basketball court.
-                    {% endif %}
-                    {% if d.bascketball_court > 1 %}
-                    There are {{d.bascketball_court|convert_num_to_letter}} residents at the basketball court.
-                    {% endif %}
-
-                    {% if d.tennis_court == 1 %}
-                    There is {{d.tennis_court|convert_num_to_letter}} resident at the tennis court.
-                    {% endif %}
-                    {% if d.tennis_court > 1 %}
-                    There are {{d.tennis_court|convert_num_to_letter}} residents at the tennis court.
-                    {% endif %}
-
-                    {% if d.club_house == 1 %}
-                    There is {{d.club_house|convert_num_to_letter}} resident at the club house.
-                    {% endif %}
-                    {% if d.club_house > 1 %}
-                    There are {{d.club_house|convert_num_to_letter}} residents at the club house.
-                    {% endif %}
-
-
-                    {% if d.cameras_not_working == 0 %}
-                    All cameras are properly working.
-                    {% endif %}
-                    {% if d.cameras_not_working == 1 %}
-                    There is {{d.cameras_not_working|convert_num_to_letter}} camera not working.
-                    {% endif %}
-                    {% if d.cameras_not_working > 1 %}
-                    There are {{d.cameras_not_working|convert_num_to_letter}} cameras not working.
-                    {% endif %}
-
-                    {% if d.gates_not_working == 0 %}
-                    All gates are properly working.
-                    {% endif %}
-                    {% if d.gates_not_working == 1 %}
-                    There is {{d.gates_not_working|convert_num_to_letter}} gate not working.
-                    {% endif %}
-                    {% if d.gates_not_working > 1 %}
-                    There are {{d.gates_not_working|convert_num_to_letter}} gates not working.
-                    {% endif %}
-
-                    {% if d.gate_arms_not_working == 0 %}
-                    All gate arms are properly working.
-                    {% endif %}
-                    {% if d.gate_arms_not_working == 1 %}
-                    There is {{d.gate_arms_not_working|convert_num_to_letter}} gate arm not working.
-                    {% endif %}
-                    {% if d.gate_arms_not_working > 1 %}
-                    There are {{d.gate_arms_not_working|convert_num_to_letter}} gate arms not working.
-                    {% endif %}
-                    {% if d.additional_comments %}
-                        {{d.additional_comments|safe}}
-                    {% endif %}
-                {% endif %}
-            </h4>
             
-            <h4>
-                {% if d.time and d.additional_comments and not d.officer_relieving and not d.officer_relieved and not d.visitor_front_gate and not d.resident_front_gate and not d.exit_front_gate and not d.entrace_back_gate and not d.exit_back_gate and not d.gym and not d.pool and not d.bascketball_court and not d.tennis_court and not d.club_house and not d.cameras_not_working and not d.gates_not_working and not d.gate_arms_not_working %}
-                <a href=" {% url 'update' d.id %} " style="color: maroon;" >{{d.time}}</a> {{ d.additional_comments|safe }} 
+            {% for d in dar %}
+                {% if d.time.day == date.day %}
+                <br>
+                <h4>
+                    {% if d.officer_relieving %}
+                        <a href=" {% url 'update' d.id %} " style="color: maroon;">{{d.time|date:'H:i'}}</a> Officer {{d.officer_relieving}} on duty to relieve officer {{d.officer_relieved}}. All notes passed down.
+                        
+                        {% if d.visitor_front_gate %}
+                        Traffic through the visitor's front gate is {{d.visitor_front_gate}}.
+                        {% endif %}
+
+                        {% if d.resident_front_gate %}
+                        Traffic through the resident's front gate is {{d.resident_front_gate}}.
+                        {% endif %}
+
+                        {% if d.exit_front_gate %}
+                        Traffic through the exit front gate is {{d.exit_front_gate}}.
+                        {% endif %}
+
+                        {% if d.exit_back_gate %}
+                        Traffic through the exit back gate is {{d.exit_back_gate}}.
+                        {% endif %}
+
+
+                        {% if d.gym == 1%}
+                        There is {{d.gym|convert_num_to_letter}} resident at the gym.
+                        {% endif %}
+                        {% if d.gym > 1 %}
+                        There are {{d.gym|convert_num_to_letter}} residents at the gym.
+                        {% endif %}
+
+                        {% if d.pool == 1 %}
+                        There is {{d.pool|convert_num_to_letter}} resident at the pool.
+                        {% endif %}
+                        {% if d.pool > 1 %}
+                        There are {{d.pool|convert_num_to_letter}} residents at the pool.
+                        {% endif %}
+
+                        {% if d.bascketball_court == 1 %}
+                        There is {{d.bascketball_court|convert_num_to_letter}} resident at the basketball court.
+                        {% endif %}
+                        {% if d.bascketball_court > 1 %}
+                        There are {{d.bascketball_court|convert_num_to_letter}} residents at the basketball court.
+                        {% endif %}
+
+                        {% if d.tennis_court == 1 %}
+                        There is {{d.tennis_court|convert_num_to_letter}} resident at the tennis court.
+                        {% endif %}
+                        {% if d.tennis_court > 1 %}
+                        There are {{d.tennis_court|convert_num_to_letter}} residents at the tennis court.
+                        {% endif %}
+
+                        {% if d.club_house == 1 %}
+                        There is {{d.club_house|convert_num_to_letter}} resident at the club house.
+                        {% endif %}
+                        {% if d.club_house > 1 %}
+                        There are {{d.club_house|convert_num_to_letter}} residents at the club house.
+                        {% endif %}
+
+
+                        {% if d.cameras_not_working == 0 %}
+                        All cameras are properly working.
+                        {% endif %}
+                        {% if d.cameras_not_working == 1 %}
+                        There is {{d.cameras_not_working|convert_num_to_letter}} camera not working.
+                        {% endif %}
+                        {% if d.cameras_not_working > 1 %}
+                        There are {{d.cameras_not_working|convert_num_to_letter}} cameras not working.
+                        {% endif %}
+
+                        {% if d.gates_not_working == 0 %}
+                        All gates are properly working.
+                        {% endif %}
+                        {% if d.gates_not_working == 1 %}
+                        There is {{d.gates_not_working|convert_num_to_letter}} gate not working.
+                        {% endif %}
+                        {% if d.gates_not_working > 1 %}
+                        There are {{d.gates_not_working|convert_num_to_letter}} gates not working.
+                        {% endif %}
+
+                        {% if d.gate_arms_not_working == 0 %}
+                        All gate arms are properly working.
+                        {% endif %}
+                        {% if d.gate_arms_not_working == 1 %}
+                        There is {{d.gate_arms_not_working|convert_num_to_letter}} gate arm not working.
+                        {% endif %}
+                        {% if d.gate_arms_not_working > 1 %}
+                        There are {{d.gate_arms_not_working|convert_num_to_letter}} gate arms not working.
+                        {% endif %}
+                        {% if d.additional_comments %}
+                            {{d.additional_comments|safe}}
+                        {% endif %}
+                    {% endif %}
+                </h4>
+                
+                <h4>
+                    {% if d.time and d.additional_comments and not d.officer_relieving and not d.officer_relieved and not d.visitor_front_gate and not d.resident_front_gate and not d.exit_front_gate and not d.entrace_back_gate and not d.exit_back_gate and not d.gym and not d.pool and not d.bascketball_court and not d.tennis_court and not d.club_house and not d.cameras_not_working and not d.gates_not_working and not d.gate_arms_not_working %}
+                    <a href=" {% url 'update' d.id %} " style="color: maroon;" >{{d.time|date:'H:i'}}</a> {{ d.additional_comments|safe }} 
+                    {% endif %}
+                </h4>
+            
+                <h4>
+                    {% if not d.officer_relieving and not d.officer_relieved %}
+                        {% if d.visitor_front_gate %}
+                        <a href="{% url 'update' d.id %}" style="color: maroon;">{{d.time|date:'H:i'}}</a> Traffic through the visitor's front gate is {{d.visitor_front_gate}}.
+                        {% endif %}
+
+                        {% if d.resident_front_gate %}
+                        Traffic through the resident's front gate is {{d.resident_front_gate}}.
+                        {% endif %}
+
+                        {% if d.exit_front_gate %}
+                        Traffic through the exit front gate is {{d.exit_front_gate}}.
+                        {% endif %}
+
+                        {% if d.entrace_back_gate %}
+                        Traffic through the entrance back gate is {{d.entrace_back_gate}}.
+                        {% endif %}
+
+                        {% if d.exit_back_gate %}
+                        Traffic through the exit back gate is {{d.exit_back_gate}}.
+                        {% endif %}
+
+                        {% if d.gym == 1%}
+                        There is {{d.gym|convert_num_to_letter}} resident at the gym.
+                        {% endif %}
+                        {% if d.gym > 1 %}
+                        There are {{d.gym|convert_num_to_letter}} residents at the gym.
+                        {% endif %}
+
+                        {% if d.pool == 1 %}
+                        There is {{d.pool|convert_num_to_letter}} resident at the pool.
+                        {% endif %}
+                        {% if d.pool > 1 %}
+                        There are {{d.pool|convert_num_to_letter}} residents at the pool.
+                        {% endif %}
+
+                        {% if d.bascketball_court == 1 %}
+                        There is {{d.bascketball_court|convert_num_to_letter}} resident at the basketball court.
+                        {% endif %}
+                        {% if d.bascketball_court > 1 %}
+                        There are {{d.bascketball_court|convert_num_to_letter}} residents at the basketball court.
+                        {% endif %}
+
+                        {% if d.tennis_court == 1 %}
+                        There is {{d.tennis_court|convert_num_to_letter}} resident at the tennis court.
+                        {% endif %}
+                        {% if d.tennis_court > 1 %}
+                        There are {{d.tennis_court|convert_num_to_letter}} residents at the tennis court.
+                        {% endif %}
+
+                        {% if d.club_house == 1 %}
+                        There is {{d.club_house|convert_num_to_letter}} resident at the club house.
+                        {% endif %}
+                        {% if d.club_house > 1 %}
+                        There are {{d.club_house|convert_num_to_letter}} residents at the club house.
+                        {% endif %}
+
+                        {% if d.cameras_not_working == 0 %}
+                        All cameras are properly working.
+                        {% endif %}
+                        {% if d.cameras_not_working == 1 %}
+                        There is {{d.cameras_not_working|convert_num_to_letter}} camera not working.
+                        {% endif %}
+                        {% if d.cameras_not_working > 1 %}
+                        There are {{d.cameras_not_working|convert_num_to_letter}} cameras not working.
+                        {% endif %}
+
+                        {% if d.gates_not_working == 0  %}
+                        All gates are properly working.
+                        {% endif %}
+                        {% if d.gates_not_working == 1 %}
+                        There is {{d.gates_not_working|convert_num_to_letter}} gate not working.
+                        {% endif %}
+                        {% if d.gates_not_working > 1 %}
+                        There are {{d.gates_not_working|convert_num_to_letter}} gates not working.
+                        {% endif %}
+
+                        {% if d.gate_arms_not_working == 0 %}
+                        All gate arms are properly working.
+                        {% endif %}
+                        {% if d.gate_arms_not_working == 1 %}
+                        There is {{d.gate_arms_not_working|convert_num_to_letter}} gate arm not working.
+                        {% endif %}
+                        {% if d.gate_arms_not_working > 1 %}
+                        There are {{d.gate_arms_not_working|convert_num_to_letter}} gate arms not working.
+                        {% endif %}
+
+                        {% if d.additional_comments and d.resident_front_gate and d.resident_front_gate %}
+                        {{d.additional_comments|safe}}
+                        {% endif %}
+
+
+                    {% endif %}
+                </h4>
                 {% endif %}
-            </h4>
-           
-            <h4>
-                {% if not d.officer_relieving and not d.officer_relieved %}
-                    {% if d.visitor_front_gate %}
-                    <a href="{% url 'update' d.id %}" style="color: maroon;">{{d.time}}</a> Traffic through the visitor's front gate is {{d.visitor_front_gate}}.
-                    {% endif %}
-
-                    {% if d.resident_front_gate %}
-                    Traffic through the resident's front gate is {{d.resident_front_gate}}.
-                    {% endif %}
-
-                    {% if d.exit_front_gate %}
-                    Traffic through the exit front gate is {{d.exit_front_gate}}.
-                    {% endif %}
-
-                    {% if d.entrace_back_gate %}
-                    Traffic through the entrance back gate is {{d.entrace_back_gate}}.
-                    {% endif %}
-
-                    {% if d.exit_back_gate %}
-                    Traffic through the exit back gate is {{d.exit_back_gate}}.
-                    {% endif %}
-
-                    {% if d.gym == 1%}
-                    There is {{d.gym|convert_num_to_letter}} resident at the gym.
-                    {% endif %}
-                    {% if d.gym > 1 %}
-                    There are {{d.gym|convert_num_to_letter}} residents at the gym.
-                    {% endif %}
-
-                    {% if d.pool == 1 %}
-                    There is {{d.pool|convert_num_to_letter}} resident at the pool.
-                    {% endif %}
-                    {% if d.pool > 1 %}
-                    There are {{d.pool|convert_num_to_letter}} residents at the pool.
-                    {% endif %}
-
-                    {% if d.bascketball_court == 1 %}
-                    There is {{d.bascketball_court|convert_num_to_letter}} resident at the basketball court.
-                    {% endif %}
-                    {% if d.bascketball_court > 1 %}
-                    There are {{d.bascketball_court|convert_num_to_letter}} residents at the basketball court.
-                    {% endif %}
-
-                    {% if d.tennis_court == 1 %}
-                    There is {{d.tennis_court|convert_num_to_letter}} resident at the tennis court.
-                    {% endif %}
-                    {% if d.tennis_court > 1 %}
-                    There are {{d.tennis_court|convert_num_to_letter}} residents at the tennis court.
-                    {% endif %}
-
-                    {% if d.club_house == 1 %}
-                    There is {{d.club_house|convert_num_to_letter}} resident at the club house.
-                    {% endif %}
-                    {% if d.club_house > 1 %}
-                    There are {{d.club_house|convert_num_to_letter}} residents at the club house.
-                    {% endif %}
-
-                    {% if d.cameras_not_working == 0 %}
-                    All cameras are properly working.
-                    {% endif %}
-                    {% if d.cameras_not_working == 1 %}
-                    There is {{d.cameras_not_working|convert_num_to_letter}} camera not working.
-                    {% endif %}
-                    {% if d.cameras_not_working > 1 %}
-                    There are {{d.cameras_not_working|convert_num_to_letter}} cameras not working.
-                    {% endif %}
-
-                    {% if d.gates_not_working == 0  %}
-                    All gates are properly working.
-                    {% endif %}
-                    {% if d.gates_not_working == 1 %}
-                    There is {{d.gates_not_working|convert_num_to_letter}} gate not working.
-                    {% endif %}
-                    {% if d.gates_not_working > 1 %}
-                    There are {{d.gates_not_working|convert_num_to_letter}} gates not working.
-                    {% endif %}
-
-                    {% if d.gate_arms_not_working == 0 %}
-                    All gate arms are properly working.
-                    {% endif %}
-                    {% if d.gate_arms_not_working == 1 %}
-                    There is {{d.gate_arms_not_working|convert_num_to_letter}} gate arm not working.
-                    {% endif %}
-                    {% if d.gate_arms_not_working > 1 %}
-                    There are {{d.gate_arms_not_working|convert_num_to_letter}} gate arms not working.
-                    {% endif %}
-
-                    {% if d.additional_comments and d.resident_front_gate and d.resident_front_gate %}
-                    {{d.additional_comments|safe}}
-                    {% endif %}
-
-
-                {% endif %}
-            </h4>
             {% endfor %}
 
 

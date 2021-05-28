@@ -2,11 +2,15 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from .models import DAR
 from .forms import DARForm
-from datetime import datetime
 from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
+import datetime
+import pytz
 
-date = datetime.now()
+utc_now = pytz.utc.localize(datetime.datetime.utcnow())
+date = utc_now.astimezone(pytz.timezone('US/Eastern'))
+
+
 
 @login_required
 def home(request):
