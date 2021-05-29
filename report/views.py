@@ -8,8 +8,9 @@ import datetime
 import pytz
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
-date = utc_now.astimezone(pytz.timezone('US/Eastern'))
+date1 = utc_now.astimezone(pytz.timezone('US/Eastern'))
 eleven_pm_hour = datetime.datetime(2021, 10, 30, 23)
+date = datetime.datetime.now()
 
 
 @login_required
