@@ -1,11 +1,5 @@
-from django.forms import widgets
-from django.http import request
-from django.shortcuts import redirect
-from report.models import DAR
 from django import forms
 from .choices import choices_for_time, choices_for_traffic, officer_relieving, officer_relieved
-from datetime import datetime
-from django.contrib.admin.widgets import AdminTimeWidget
 from django.forms.widgets import DateTimeInput
 
 

@@ -20,7 +20,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', report_views.home, name='report'),
+    path('', report_views.home, name='home'),
+    path('create-dar/', report_views.create_dar, name='create-dar'),
     path('<int:pk>/update/', report_views.DARUpdateView.as_view(), name='update'),
     path('<int:pk>/delete/', report_views.DARDeleteView.as_view(), name='delete'),
     path('login/', LoginView.as_view(template_name='report/login.html'), name='login'),

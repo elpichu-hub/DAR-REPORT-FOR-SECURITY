@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from .models import DAR
 from .forms import DARForm
-from django.views.generic import UpdateView, DeleteView
+from django.views.generic import UpdateView, DeleteView, ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 import datetime
@@ -11,14 +11,22 @@ import pytz
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
 date1 = utc_now.astimezone(pytz.timezone('US/Eastern'))
-eleven_pm_hour = datetime.datetime(2021, 10, 30, 23)
-four_am_hour = datetime.datetime(2021, 5, 30, 4, 00)
+eleven_pm_hour = datetime.datetime(2021, 10, 30, 23, 00)
+four_am_hour = datetime.datetime(2021, 10, 30, 4, 00)
 date = datetime.datetime.now()
 
 
-@login_required
 def home(request):
-    
+    context = {
+        'date': date,
+        'dar': DAR.objects.all()
+    }
+    return render(request, 'report/home.html', context)
+
+
+
+@login_required
+def create_dar(request):
     form = DARForm()
     if request.method == 'POST':
         form = DARForm(request.POST)
@@ -43,17 +51,14 @@ def home(request):
                 additional_comments=form.cleaned_data.get('additional_comments'),
                 user = request.user,
             )
-            print(type(new_dar.gym))
             new_dar.save()
-            return redirect('report')
+            return redirect('home')
     else:
         form = DARForm()
     context = {
         'dar': DAR.objects.all().order_by('time'),
         'form': form,
         'date': date,
-        'eleven_pm_time': eleven_pm_hour,
-        'four_am_hour': four_am_hour,
     }
     return render(request, 'report/report.html', context)
 
