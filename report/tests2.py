@@ -1,6 +1,10 @@
-import datetime
-import pytz
+from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
+import requests
 
-utc_now = pytz.utc.localize(datetime.datetime.utcnow())
-date = utc_now.astimezone(pytz.timezone('US/Eastern'))
-print(date)
+source = requests.get('http://icu-dar-report.herokuapp.com').text
+soup = BeautifulSoup(source, 'html.parser')
+print(soup.h4)
+
+
+

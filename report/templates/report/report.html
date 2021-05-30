@@ -22,7 +22,7 @@
             <br>
             
             {% for d in dar %}
-                {% if d.time.day == date.day or d.time.hour >= eleven_pm_time.hour %}
+                {% if d.time.day == date.day or d.time.hour >= eleven_pm_time.hour or d.time.hour <= four_am_hour.hour %}
                 <br>
                 <h4>
                     {% if d.officer_relieving %}

@@ -4,12 +4,15 @@ from .models import DAR
 from .forms import DARForm
 from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 import datetime
 import pytz
+
 
 utc_now = pytz.utc.localize(datetime.datetime.utcnow())
 date1 = utc_now.astimezone(pytz.timezone('US/Eastern'))
 eleven_pm_hour = datetime.datetime(2021, 10, 30, 23)
+four_am_hour = datetime.datetime(2021, 5, 30, 4, 00)
 date = datetime.datetime.now()
 
 
@@ -50,13 +53,14 @@ def home(request):
         'form': form,
         'date': date,
         'eleven_pm_time': eleven_pm_hour,
+        'four_am_hour': four_am_hour,
     }
     return render(request, 'report/report.html', context)
 
 
 
 
-class DARUpdateView(UpdateView):
+class DARUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = DAR
     fields = [
         'time', 'officer_relieving', 'officer_relieved', 'visitor_front_gate',
@@ -65,11 +69,31 @@ class DARUpdateView(UpdateView):
         'gates_not_working', 'gate_arms_not_working', 'additional_comments'
     ]
     
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
-class DARDeleteView(DeleteView):
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+           return True
+        return False
+    
+
+class DARDeleteView(LoginRequiredMixin, DeleteView):
     model = DAR
     context_object_name = 'dar'
     success_url = '/'
+     
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form) 
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+           return True
+        return False
 
 
 
