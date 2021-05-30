@@ -10,10 +10,9 @@
         
         <div class="col p-5 border rounded-3 bg-light ms-4">
             <h3 style="text-align: center;">Legends Golf & Country Club</h3>
-            <h3 style="text-align: center;">Daily Activity Report/{{date|date:'F d, o' }}
+            <h3 style="text-align: center;">Daily Activity Report/{{date|date:'F d, o' }}/Officer: Gonzalez
                 {{user.last_name|capfirst}}</h3>
             <br>
-            <h2>{{dar.time}}</h2>
             {% for d in dar %}
                 
                 <br>
@@ -107,15 +106,15 @@
                             {{d.additional_comments|safe}}
                         {% endif %}
                     {% endif %}
-                </h4>
                 
-                <h4>
+                
+                
                     {% if d.time and d.additional_comments and not d.officer_relieving and not d.officer_relieved and not d.visitor_front_gate and not d.resident_front_gate and not d.exit_front_gate and not d.entrace_back_gate and not d.exit_back_gate and not d.gym and not d.pool and not d.bascketball_court and not d.tennis_court and not d.club_house and not d.cameras_not_working and not d.gates_not_working and not d.gate_arms_not_working %}
                     <a href=" {% url 'update' d.id %} " style="color: maroon;" >{{d.time|date:'H:i'}}</a> {{ d.additional_comments|safe }} 
                     {% endif %}
-                </h4>
+                
             
-                <h4>
+                
                     {% if not d.officer_relieving and not d.officer_relieved %}
                         {% if d.visitor_front_gate %}
                         <a href="{% url 'update' d.id %}" style="color: maroon;">{{d.time|date:'H:i'}}</a> Traffic through the visitor's front gate is {{d.visitor_front_gate}}.

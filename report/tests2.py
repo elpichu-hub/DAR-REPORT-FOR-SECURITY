@@ -19,7 +19,11 @@ session.post(url=login_url, data=login_info)
 url = session.get(url=scrape_url)
 
 soup = BeautifulSoup(url.content, 'html.parser')
-print(soup)
+text = soup.find_all('h4')
+for t in text:
+    a = t.text.strip()
+    print(len(a))
+
 
 
 
