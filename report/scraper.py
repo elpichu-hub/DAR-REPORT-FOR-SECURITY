@@ -14,6 +14,7 @@ soup = BeautifulSoup(url.content, 'lxml')
 
 def run_daily_report_header_scraper():
     daily_report_header = []
+    daily_report_header_string = ''
     report_header = soup.find_all('h3')
     for line in report_header:
         line = line.text
@@ -26,6 +27,7 @@ def run_daily_report_header_scraper():
 
 def run_daily_report_scraper():
     daily_report = []
+    daily_report_string = ''
     hourly_report = soup.find_all('h4')
     for line in hourly_report:
         line = line.text
