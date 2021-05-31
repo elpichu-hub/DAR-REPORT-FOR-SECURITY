@@ -30,7 +30,11 @@
           <li class="nav-link px-2 text" style="color: rgb(38, 0, 255);">--</li>
           <li class="nav-link px-2 text" style="color: purple;">--</li>
           <li class="nav-link px-2 text" style="color: rgb(225, 38, 231);">--</li>
+          <a href="{% url 'create-dar' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <i class="bi bi-plus-square" style="font-size: 1.4rem;"></i>
+          </a>
         </ul>
+        
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search...">
@@ -50,6 +54,7 @@
   </header>
 
   {% block content %}{% endblock content %}
+  
 </body>
 
 </html>
