@@ -25,7 +25,7 @@ urlpatterns = [
     path('<int:pk>/update/', report_views.DARUpdateView.as_view(), name='update'),
     path('<int:pk>/delete/', report_views.DARDeleteView.as_view(), name='delete'),
     path('send-emails-confirm/', report_views.send_emails_confirm, name='send-emails-confirm'),
-    #path('send-emails/', report_views.send_emails, name='send-emails'),
+    path('send-emails/', report_views.send_emails, name='send-emails'),
     path('login/', LoginView.as_view(template_name='report/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='report/logout.html'), name='logout'),
     
