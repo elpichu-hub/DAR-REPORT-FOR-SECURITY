@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['icu-dar-report.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'scraper.apps.ScraperConfig',
     'crispy_forms',
     'report.apps.ReportConfig',
     'django.contrib.admin',

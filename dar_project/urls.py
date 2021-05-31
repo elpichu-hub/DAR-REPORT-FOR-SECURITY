@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from report import views as report_views
 from django.contrib.auth.views import LoginView, LogoutView
+from scraper import views as scraper_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,8 +25,8 @@ urlpatterns = [
     path('create-dar/', report_views.create_dar, name='create-dar'),
     path('<int:pk>/update/', report_views.DARUpdateView.as_view(), name='update'),
     path('<int:pk>/delete/', report_views.DARDeleteView.as_view(), name='delete'),
-    path('send-emails-confirm/', report_views.send_emails_confirm, name='send-emails-confirm'),
-    path('send-emails/', report_views.send_emails, name='send-emails'),
+    path('send-emails-confirm/', scraper_views.send_emails_confirm, name='send-emails-confirm'),
+    path('send-emails/', scraper_views.send_emails, name='send-emails'),
     path('login/', LoginView.as_view(template_name='report/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='report/logout.html'), name='logout'),
     

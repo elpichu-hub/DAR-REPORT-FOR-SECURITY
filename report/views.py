@@ -1,12 +1,9 @@
 from django.shortcuts import redirect, render
 from .models import DAR
 from .forms import DARForm
-from django.views.generic import UpdateView, DeleteView, ListView
+from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.core.mail import send_mail
-from django.conf import settings
-from . import scraper
 import datetime
 
 
@@ -14,22 +11,6 @@ import datetime
 date = datetime.datetime.now()
 formated_date_for_email = date.strftime('%b %d, %y')
 
-
-##send email view
-def send_emails(request):
-    subject = f'DAR {formated_date_for_email}'
-    message = scraper.header + '\n \n' + scraper.report
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['lazlemlop@gmail.com']
-    send_mail(subject, message, email_from, recipient_list)
-    return redirect('create-dar')
-    
-
-
-### asks the user if he wants to send an email.
-def send_emails_confirm(request):
-    return render(request, 'report/send_mail.html')
-    
 
 
 def home(request):
