@@ -4,7 +4,7 @@ import requests
 
 
 
-url = requests.get(url='http://icu-dar-report.herokuapp.com/')
+url = requests.get(url='https://icu-dar-report.herokuapp.com/')
 
 soup = BeautifulSoup(url.content, 'lxml')
 
@@ -21,7 +21,7 @@ for line in report_header:
     daily_report_header.append(line)
     daily_report_header_string = " \n".join(daily_report_header)
     
-print(daily_report_header_string)
+    print(daily_report_header_string)
 
 
 

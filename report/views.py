@@ -11,7 +11,8 @@ import datetime
 date = datetime.datetime.now()
 formated_date_for_email = date.strftime('%b %d, %y')
 
-
+def test(request):
+    return render(request, 'report/test.html')
 
 def home(request):
     context = {
