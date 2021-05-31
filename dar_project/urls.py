@@ -21,8 +21,7 @@ from scraper import views as scraper_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', report_views.home, name='home'),
-    path('', report_views.test, name='test'),
+    path('', report_views.home, name='home'),
     path('create-dar/', report_views.create_dar, name='create-dar'),
     path('<int:pk>/update/', report_views.DARUpdateView.as_view(), name='update'),
     path('<int:pk>/delete/', report_views.DARDeleteView.as_view(), name='delete'),
