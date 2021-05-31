@@ -16,13 +16,13 @@ formated_date_for_email = date.strftime('%b %d, %y')
 
 
 ##send email view
-def send_emails(request):
-    subject = f'DAR {formated_date_for_email}'
-    message = scraper.run_daily_report_header_scraper() + '\n \n' + scraper.run_daily_report_scraper()
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['lazlemlop@gmail.com']
-    send_mail(subject, message, email_from, recipient_list)
-    return redirect('create-dar')
+#def send_emails(request):
+    #subject = f'DAR {formated_date_for_email}'
+    #message = scraper.run_daily_report_header_scraper() + '\n \n' + scraper.run_daily_report_scraper()
+    #email_from = settings.EMAIL_HOST_USER
+    #recipient_list = ['lazlemlop@gmail.com']
+    #send_mail(subject, message, email_from, recipient_list)
+    #return redirect('create-dar')
     
 
 
