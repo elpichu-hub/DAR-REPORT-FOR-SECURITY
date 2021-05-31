@@ -1,0 +1,46 @@
+{% extends 'report/base.html' %}
+{% load crispy_forms_tags %}
+{% load convert_num_to_letter %}
+
+
+
+{% block content %}
+
+
+
+
+
+
+
+
+
+<div class="b-example-divider"></div>
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+
+        <div class="col-10 mx-auto col-lg-5">
+            <div class="p-5 border rounded-3 bg-light"> 
+                <h3>Are you sure you want to send an email?</h3>
+                <a href="{% url 'send-emails' %}"><button type="submit" class="w-100 btn btn-lg btn-success mt-3"> Send
+                    Email</button></a>
+                <hr class="my-4">
+                <a href="{% url 'home' %}"><button type="submit" class="w-100 btn btn-lg btn-warning mt-3">Double Check Email</button></a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

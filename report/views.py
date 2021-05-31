@@ -1,19 +1,36 @@
-from django.contrib.auth.models import User
+from bs4.element import Script
 from django.shortcuts import redirect, render
 from .models import DAR
 from .forms import DARForm
 from django.views.generic import UpdateView, DeleteView, ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.core.mail import send_mail
+from django.conf import settings
+from . import scraper
 import datetime
-import pytz
 
 
-utc_now = pytz.utc.localize(datetime.datetime.utcnow())
-date1 = utc_now.astimezone(pytz.timezone('US/Eastern'))
-eleven_pm_hour = datetime.datetime(2021, 10, 30, 23, 00)
-four_am_hour = datetime.datetime(2021, 10, 30, 4, 00)
+
 date = datetime.datetime.now()
+formated_date_for_email = date.strftime('%b %d, %y')
+##send email view
+def send_emails(request):
+    
+    subject = f'DAR {formated_date_for_email}'
+    message = scraper.run_daily_report_header_scraper() + '\n \n' + scraper.run_daily_report_scraper()
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['lazlemlop@gmail.com']
+    send_mail(subject, message, email_from, recipient_list)
+    return redirect('create-dar')
+    
+
+
+### asks the user if he wants to send an email.
+def send_emails_confirm(request):
+    return render(request, 'report/send_mail.html')
+    
+
 
 
 def home(request):
