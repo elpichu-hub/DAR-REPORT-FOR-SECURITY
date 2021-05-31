@@ -23,6 +23,7 @@ def run_daily_report_header_scraper():
         daily_report_header_string = " \n".join(daily_report_header)
     return daily_report_header_string
 
+header = run_daily_report_header_scraper()
 
 
 def run_daily_report_scraper():
@@ -33,8 +34,11 @@ def run_daily_report_scraper():
         line = line.text
         line = " ".join(line.split())
         daily_report.append(line)
-        daily_report_string = "  \n\n".join(daily_report)
+        daily_report_string = "  \n".join(daily_report)
     return daily_report_string
+
+report = run_daily_report_scraper()
+
 
 
     
