@@ -6,7 +6,7 @@ import requests
 
 url = requests.get(url='http://icu-dar-report.herokuapp.com/')
 
-soup = BeautifulSoup(url.content, 'html.parser')
+soup = BeautifulSoup(url.content, 'lxml')
 
 
 ##this = " ".join(this.split())  --- will 'split' the string into each word on a list, then will 'join' them by a space into a single string##
