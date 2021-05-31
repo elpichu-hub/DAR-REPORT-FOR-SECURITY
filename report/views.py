@@ -1,4 +1,3 @@
-from bs4.element import Script
 from django.shortcuts import redirect, render
 from .models import DAR
 from .forms import DARForm
@@ -14,9 +13,10 @@ import datetime
 
 date = datetime.datetime.now()
 formated_date_for_email = date.strftime('%b %d, %y')
+
+
 ##send email view
 def send_emails(request):
-    
     subject = f'DAR {formated_date_for_email}'
     message = scraper.run_daily_report_header_scraper() + '\n \n' + scraper.run_daily_report_scraper()
     email_from = settings.EMAIL_HOST_USER
@@ -30,7 +30,6 @@ def send_emails(request):
 def send_emails_confirm(request):
     return render(request, 'report/send_mail.html')
     
-
 
 
 def home(request):
