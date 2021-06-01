@@ -29,7 +29,8 @@ choices_for_officers = [
     ('Segal', 'Segal'),
     ('Burchfield', 'Burchfield'),
     ('Wallace', 'Wallace'),
-    ('Ayala', 'Ayala')
+    ('Ayala', 'Ayala'),
+    ('Vazquez', 'Vazquez')
 ]
 
 
@@ -39,7 +40,8 @@ officer_relieving = [
     ('Segal', 'Segal'),
     ('Burchfield', 'Burchfield'),
     ('Wallace', 'Wallace'),
-    ('Ayala', 'Ayala')
+    ('Ayala', 'Ayala'),
+    ('Vazquez', 'Vazquez')
 ]
 
 officer_relieved = [
@@ -48,7 +50,8 @@ officer_relieved = [
     ('Segal', 'Segal'),
     ('Burchfield', 'Burchfield'),
     ('Wallace', 'Wallace'),
-    ('Ayala', 'Ayala')
+    ('Ayala', 'Ayala'),
+    ('Vazquez', 'Vazquez')
 ]
 
 
