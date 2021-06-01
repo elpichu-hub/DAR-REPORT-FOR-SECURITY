@@ -29,6 +29,4 @@ urlpatterns = [
     path('send-emails/', scraper_views.send_emails, name='send-emails'),
     path('login/', LoginView.as_view(template_name='report/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='report/logout.html'), name='logout'),
-    
-    
 ]

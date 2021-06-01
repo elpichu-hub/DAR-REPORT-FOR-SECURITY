@@ -50,7 +50,7 @@ def create_dar(request):
                 user = request.user,
             )
             new_dar.save()
-            return redirect('home')
+            return redirect('create-dar')
     else:
         form = DARForm()
     context = {
