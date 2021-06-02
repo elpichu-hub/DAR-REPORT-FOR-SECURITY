@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.fields import TextField
 from django.urls import reverse
 
 
@@ -36,6 +37,16 @@ class DAR(models.Model):
     def get_absolute_url(self):
         return reverse('create-dar')
 
+
+
+class End_Of_Shift_Dar(models.Model):
+    date = models.DateTimeField(default=datetime.now)
+    report = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    
+
+    def __repr__(self):
+        return f'{self.date}'
 
 
 

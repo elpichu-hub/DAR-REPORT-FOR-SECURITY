@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['icu-dar-report.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'scraper.apps.ScraperConfig',
     'crispy_forms',
     'report.apps.ReportConfig',
@@ -144,5 +145,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'etubrute56@gmail.com'
-EMAIL_HOST_PASSWORD = 'Compay2nd'
+EMAIL_HOST_USER = 'legendspublicsafety@gmail.com'
+EMAIL_HOST_PASSWORD = 'IcuPatrol1690'
+
+
+
+
+##### for development user this credentials #####
+#######EMAIL_HOST_USER = 'etubrute56@gmail.com'
+#######EMAIL_HOST_PASSWORD = 'Compay2nd'

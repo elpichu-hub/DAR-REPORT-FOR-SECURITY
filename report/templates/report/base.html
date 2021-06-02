@@ -20,7 +20,8 @@
   <header class="p-3 bg-dark text-white sticky-top">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="{% url 'send-emails-confirm' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <a href="{% url 'send-emails-confirm' %}"
+          class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <i class="bi bi-envelope me-2" style="font-size: 1.5rem;"></i>
         </a>
 
@@ -30,11 +31,12 @@
           <li class="nav-link px-2 text" style="color: rgb(38, 0, 255);">--</li>
           <li class="nav-link px-2 text" style="color: purple;">--</li>
           <li class="nav-link px-2 text" style="color: rgb(225, 38, 231);">--</li>
-          <a href="{% url 'create-dar' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <a href="{% url 'create-dar' %}"
+            class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
             <i class="bi bi-plus-square" style="font-size: 1.4rem;"></i>
           </a>
         </ul>
-        
+
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search...">
@@ -43,18 +45,29 @@
         <div class="text-end">
           <button type="button" class="btn btn-outline-light me-2">Search</button>
           {% if user.is_authenticated %}
-          <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary me-2" >Logout</button></a>
+          <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary me-2">Logout</button></a>
           {% else %}
-          <a href=" {% url 'login' %} "><button type="button" class="btn btn-warning me-2" >Login</button></a>
+          <a href=" {% url 'login' %} "><button type="button" class="btn btn-warning me-2">Login</button></a>
           {% endif %}
-          
+
         </div>
       </div>
     </div>
   </header>
-
+  <div class="d-flex justify-content-center">
+    <div >
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
   {% block content %}{% endblock content %}
-  
+
+
 </body>
 
 </html>
